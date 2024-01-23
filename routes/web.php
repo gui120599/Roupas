@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/Categoria/{categoria}', [CategoriaController::class, 'update'])->name('categoria.update');
     Route::get('/Ativar-Categoria/{id}', [CategoriaController::class, 'active'])->name('categoria.active');
     Route::delete('/Categoria/{id}', [CategoriaController::class, 'destroy'])->name('categoria.destroy');
+
+    Route::get('/Produto', [ProdutoController::class, 'index'])->name('produto');
+    Route::get('/Produtos-Inativos', [ProdutoController::class, 'inactive'])->name('produto.inactive');
+    Route::post('/Produto', [ProdutoController::class, 'store'])->name('produto.store');
+    Route::get('/Produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');
+    Route::get('/Produto/{produto}/Editar', [ProdutoController::class, 'edit'])->name('produto.edit');
+    Route::patch('/Produto/{produto}', [ProdutoController::class, 'update'])->name('produto.update');
+    Route::get('/Ativar-Produto/{id}', [ProdutoController::class, 'active'])->name('produto.active');
+    Route::delete('/Produto/{id}', [ProdutoController::class, 'destroy'])->name('produto.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

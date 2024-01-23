@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <a href="{{ route('categoria') }}">{{ __('Categorias') }}</a>
+            <a href="{{ route('produto') }}">{{ __('Produtos') }}</a>
         </h2>
     </x-slot>
 
@@ -11,7 +11,7 @@
                 <div class="w-full">
                     <header>
                         <h2 class="text-lg font-medium text-gray-900">
-                            {{ __('Categorias Inativadas') }}
+                            {{ __('Produtos Inativados') }}
                         </h2>
                     </header>
                     <div class="w-[18rem] sm:w-[99%] overflow-auto mx-auto h-2/4">
@@ -25,22 +25,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($categorias) > 0)
-                                    @foreach ($categorias as $categoria)
+                                @if (count($produtos) > 0)
+                                    @foreach ($produtos as $produto)
                                         <tr class="border-top border-gray-300">
-                                            <td>{{ $categoria->id }}</td>
-                                            <td>{{ $categoria->categoria_nome }}</td>
+                                            <td>{{ $produto->id }}</td>
+                                            <td>{{ $produto->categoria_nome }}</td>
                                             <td>
                                                 <div class="flex items-center justify-center space-x-4">
                                                     <x-primary-button
-                                                        onclick="window.location.href = '{{ route('categoria.active', ['id' => $categoria->id]) }}'">Ativar</x-primary-button>
+                                                        onclick="window.location.href = '{{ route('produto.active', ['id' => $produto->id]) }}'">Ativar</x-primary-button>
                                                 </div>
                                             </td>
                                         </tr>
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="3" class="text-center py-4">Nenhuma categoria encontrada.</td>
+                                        <td colspan="3" class="text-center py-4">Nenhuma produto encontrada.</td>
                                     </tr>
                                 @endif
                             </tbody>

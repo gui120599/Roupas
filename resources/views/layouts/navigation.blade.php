@@ -43,7 +43,7 @@
                                     <i class='bx bx-category-alt'></i>
                                     <span>{{ __('Categorias') }}</span>
                                 </x-dropdown-link>
-                                <x-dropdown-link class="flex items-center space-x-8" :href="route('categoria')">
+                                <x-dropdown-link class="flex items-center space-x-8" :href="route('produto')">
                                     <i class='bx bxs-t-shirt'></i>
                                     <span>{{ __('Produtos') }}</span>
                                 </x-dropdown-link>
