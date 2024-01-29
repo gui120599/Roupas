@@ -25,8 +25,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($produtos) > 0)
-                                    @foreach ($produtos as $produto)
+                                @if (count($categorias->produtos) > 0)
+                                    @foreach ($categorias->produtos as $produto)
                                         <tr class="border-top border-gray-300">
                                             <td>{{ $produto->id }}</td>
                                             <td>{{ $produto->categoria_nome }}</td>

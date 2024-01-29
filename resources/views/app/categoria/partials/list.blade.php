@@ -4,7 +4,7 @@
             <h2 class="text-lg font-medium text-gray-900">
                 {{ __('Lista de Categorias') }}
             </h2>
-            <x-primary-button onclick="window.location.href = '{{ route('categoria.inactive') }}'">Mostrar Inativos</x-primary-button>
+            <x-secondary-button onclick="window.location.href = '{{ route('categoria.inactive') }}'">Mostrar Inativos</x-secondary-button>
         </div>
     </header>
     <div class="w-[18rem] sm:w-[99%] overflow-auto mx-auto h-2/4">

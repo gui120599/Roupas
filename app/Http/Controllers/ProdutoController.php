@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Produto;
 use App\Http\Requests\StoreProdutoRequest;
 use App\Http\Requests\UpdateProdutoRequest;
@@ -13,8 +14,8 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::with('categorias')->get();
-        return view('app.produto.index', ['produtos' => $produtos]);
+        $categorias = Categoria::with('produtos')->get();
+        return view('app.produto.index', ['categorias' => $categorias]);
     }
 
     /**
