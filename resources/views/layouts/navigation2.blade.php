@@ -131,9 +131,27 @@
             navLinks.forEach(span => {
                 span.classList.toggle('hidden');
             });
-
         }
 
+        function toogleSidebarsm() {
+            const isMd = window.matchMedia("(min-width: 768px)").matches;
+            const BtnToggleSideBar = document.querySelector('.toggleSideBar');
+            const sidebar = document.querySelector('.sidebar');
+            const logo = document.querySelector('.logo');
+            const navLinks = document.querySelectorAll('.sidebar span');
+
+            if (isMd) {
+                
+            } else {
+                BtnToggleSideBar.classList.add('rotate-180');
+                sidebar.classList.add('sidebar-hidden');
+                logo.classList.add('logo-hidden');
+                navLinks.forEach(span => {
+                    span.classList.add('hidden');
+                });
+            }
+        }
+        toogleSidebarsm();
 
 
         function dropdown(prefix) {
