@@ -25,7 +25,7 @@
         </div>
 
         <!-- Conteúdo principal -->
-        <div class="flex flex-col flex-1 overflow-hidden transition-margin ease-in-out duration-300">
+        <div class="content flex flex-col flex-1 overflow-hidden transition-margin ease-in-out duration-300">
             <!-- Barra de navegação superior fixa -->
             @if (isset($header))
                 <header class="bg-transparent">
@@ -37,7 +37,7 @@
 
             <!-- Page Content -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 transition-margin ease-in-out duration-300">
-                <div class="container mx-auto px-6 py-8">
+                <div class="container mx-auto px-4 py-4">
                     {{ $slot }}
                 </div>
             </main>
@@ -50,12 +50,15 @@
     <script>
         function updateSidebarPosition() {
             const sidebar = document.querySelector('.sidebar');
+            const main = document.querySelector('.content');
             const isMd = window.matchMedia("(min-width: 768px)").matches;
 
             if (isMd) {
                 sidebar.classList.remove('fixed');
+                main.classList.remove('ml-20');
             } else {
                 sidebar.classList.add('fixed');
+                main.classList.add('ml-20');
             }
         }
 
