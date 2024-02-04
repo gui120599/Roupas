@@ -20,16 +20,15 @@
 <body class="font-sans antialiased">
     <div class="flex h-screen bg-gray-200">
         <!-- Barra lateral -->
-        <div class="sidebar md:block top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900 transition-width ease-in-out duration-300">
+        <div class="sidebar z-50 md:block top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900 transition-width ease-in-out duration-300">
             @include('layouts.navigation2')
         </div>
-
         <!-- Conteúdo principal -->
         <div class="content flex flex-col flex-1 overflow-hidden transition-margin ease-in-out duration-300">
             <!-- Barra de navegação superior fixa -->
             @if (isset($header))
                 <header class="bg-transparent">
-                    <div class="h-16 max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 ">
+                    <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8 ">
                         {{ $header }}
                     </div>
                 </header>
@@ -37,7 +36,7 @@
 
             <!-- Page Content -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 transition-margin ease-in-out duration-300">
-                <div class="container mx-auto px-4 py-4">
+                <div class="container mx-auto px-4 pt-2 pb-4">
                     {{ $slot }}
                 </div>
             </main>
@@ -47,8 +46,25 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        $(document).ready(function() {
+            $('.date').mask('11/11/1111');
+            $('.time').mask('00:00:00');
+            $('.date_time').mask('00/00/0000 00:00:00');
+            $('.cep').mask('00000-000');
+            $('.phone').mask('0000-0000');
+            $('.phone_with_ddd').mask('(00) 0000-0000');
+            $('.phone_us').mask('(000) 000-0000');
+            $('.mixed').mask('AAA 000-S0S');
+            $('.cpf').mask('000.000.000-00', {
+                reverse: true
+            });
+            $('.money').mask('#.##0,00', {
+                reverse: true
+            });
+        });
         function updateSidebarPosition() {
+            const BtnToggleSideBar = document.querySelector('.toggleSideBar');
             const sidebar = document.querySelector('.sidebar');
             const main = document.querySelector('.content');
             const isMd = window.matchMedia("(min-width: 768px)").matches;
@@ -56,9 +72,11 @@
             if (isMd) {
                 sidebar.classList.remove('fixed');
                 main.classList.remove('ml-20');
+                BtnToggleSideBar.classList.remove('rotate-180');
             } else {
                 sidebar.classList.add('fixed');
                 main.classList.add('ml-20');
+                BtnToggleSideBar.classList.add('rotate-180');
             }
         }
 

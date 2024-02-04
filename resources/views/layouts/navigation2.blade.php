@@ -11,11 +11,11 @@
     <hr class="h-px my-2 border-0 dark:bg-gray-700">
 
     <!-- Nav-link´s-->
-    <div class="p2.5 mt-3 flex items-center rounded-md px-4 durations-300 cursor-pointer bg-gray-700">
+    <!--<div class="p2.5 mt-3 flex items-center rounded-md px-4 durations-300 cursor-pointer bg-gray-700">
         <i class='bx bx-search text-sm'></i>
         <input type="text" placeholder="Buscar"
             class="text-[15px] ml-4 w-full bg-transparent border-none focus:border-transparent focus:ring-0">
-    </div>
+    </div>-->
     <x-nav-link :href="route('produto')" :active="request()->routeIs('produto')">
         <i class='bx bxs-badge-dollar'></i>
         <span class="text-[15px] ml-4 text-gray-200">{{ __('Vender') }}</span>
@@ -50,12 +50,12 @@
         <i class='bx bx-money-withdraw'></i>
         <div class="flex justify-between w-full items-center">
             <span class="text-[15px] ml-4 text-gray-200">Financeiro</span>
-            <span class="rotate-180" id="arrow-finan">
-                <i class='bx bx-chevron-down'></i>
+            <span class="transition-transform" id="arrow-finan">
+                <i class='bx bx-chevron-up '></i>
             </span>
         </div>
     </div>
-    <div class="pl-4 text-sm font-thin mt-2 w-4/5 mx-auto transition duration-1000 ease-in-out" id="submenu-finan">
+    <div class="pl-4 text-sm font-thin mt-2 w-4/5 mx-auto transition duration-700 ease-in-out" id="submenu-finan">
         <x-nav-link :href="route('produto')" :active="request()->routeIs('produto')">
             <i class='bx bx-dollar'></i>
             <span class="text-[15px] ml-4 text-gray-200">{{ __('Caixa') }}</span>
@@ -69,12 +69,12 @@
         <i class='bx bxs-cog'></i>
         <div class="flex justify-between w-full items-center">
             <span class="text-[15px] ml-4 text-gray-200">Configurações Gerais</span>
-            <span class="rotate-180" id="arrow-config">
-                <i class='bx bx-chevron-down'></i>
+            <span class="transition-transform" id="arrow-config">
+                <i class='bx bx-chevron-up '></i>
             </span>
         </div>
     </div>
-    <div class="pl-4 text-sm font-thin mt-2 w-4/5 mx-auto" id="submenu-config">
+    <div class="pl-4 text-sm font-thin mt-2 w-4/5 mx-auto transition duration-700 ease-in-out" id="submenu-config">
         <x-nav-link :href="route('produto')" :active="request()->routeIs('produto')">
             <i class='bx bx-user'></i>
             <span class="text-[15px] ml-4 text-gray-200">{{ __('Clientes') }}</span>
@@ -141,9 +141,9 @@
             const navLinks = document.querySelectorAll('.sidebar span');
 
             if (isMd) {
-                
+
             } else {
-                BtnToggleSideBar.classList.add('rotate-180');
+                BtnToggleSideBar.classList.add('rotate-0');
                 sidebar.classList.add('sidebar-hidden');
                 logo.classList.add('logo-hidden');
                 navLinks.forEach(span => {
@@ -155,9 +155,13 @@
 
 
         function dropdown(prefix) {
-            document.querySelector('#submenu-' + prefix).classList.toggle('hidden');
-            document.querySelector('#arrow-' + prefix).classList.toggle('rotate-0');
+            const submenu = document.querySelector('#submenu-' + prefix);
+            const arrow = document.querySelector('#arrow-' + prefix);
+
+            submenu.classList.toggle('hidden');
+            arrow.classList.toggle('rotate-180');
         }
+
         dropdown('finan');
         dropdown('config');
     </script>
