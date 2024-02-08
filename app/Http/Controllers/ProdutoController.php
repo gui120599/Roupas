@@ -75,7 +75,9 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        return view('app.produto.edit', ['produto' => $produto]);
+        $categorias = Categoria::all();
+        return view('app.produto.edit', ['produto' => $produto], ['categorias' => $categorias]);
+    
     }
 
     /**
