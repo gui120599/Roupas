@@ -23,16 +23,22 @@
                 @if ($categoria->produtos->isEmpty())
                     <p class="text-gray-400">Não há produtos disponíveis nesta categoria.</p>
                 @else
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 gap-4 ">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
                         @foreach ($categoria->produtos as $produto)
                             <div class="relative snap-end ">
                                 <a href="{{ route('produto.edit', ['produto' => $produto]) }}">
                                     <div
                                         class="w-full bg-gray-100 p-2 rounded-lg flex items-start justify-between opacity-95 hover:opacity-100 gap-1">
                                         <div class="w-2/5">
+                                            @if ($produto->produto_foto)
                                             <img src="{{ asset('img/fotos_produtos/' . $produto->produto_foto) }}"
-                                                alt="{{ $produto->produtso_descricao }}"
-                                                class="w-40 h-28 object-cover rounded-lg ">
+                                            alt="{{ $produto->produtso_descricao }}"
+                                            class="w-40 h-28 object-cover rounded-lg ">
+                                            @else
+                                                <img id="imagem-preview"
+                                                class="w-40 h-28 object-cover rounded-lg "
+                                                    src="{{ asset('Sem Imagem.png') }}" alt="Imagem Padrão">
+                                            @endif
                                         </div>
                                         <div class="w-3/5 h-28 flex flex-col justify-center">
                                             <h2 class="text-gray-900 text-sm uppercase">

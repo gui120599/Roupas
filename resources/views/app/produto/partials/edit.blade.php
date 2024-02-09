@@ -57,8 +57,13 @@
                                 <x-input-label for="produto_foto" :value="__('Foto do Produto')" />
                             </div>
                             <div class="flex flex-wrap justify-center gap-y-2">
-                                <img id="imagem-preview" class="mborder rounded-lg object-contain w-40 h-40 p-1"
-                                    src="{{ asset('img/fotos_produtos/' . $produto->produto_foto) }}" />
+                                @if ($produto->produto_foto)
+                                    <img id="imagem-preview" class="mborder rounded-lg object-contain w-40 h-40 p-1"
+                                        src="{{ asset('img/fotos_produtos/' . $produto->produto_foto) }}" />
+                                @else
+                                    <img id="imagem-preview" class="mborder rounded-lg object-contain w-40 h-40 p-1"
+                                        src="{{ asset('Sem Imagem.png') }}" alt="Imagem Padrão">
+                                @endif
                                 <x-text-input id="produto_foto" name="produto_foto" type="file"
                                     class="cursor-pointer p-1 w-64 " onchange="previewImage(this)" />
                             </div>
@@ -209,4 +214,117 @@
         </x-primary-button>
 
     </form>
+    <script>
+        function previewImage(input) {
+            var preview = document.getElementById('imagem-preview');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function() {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        }
+    </script>
+    <script type="module">
+        $(document).ready(function() {
+            // Função para calcular e atualizar os campos de preços
+            $('#produto_valor_percentual_venda').on('input', () => {
+                var percentualVenda = parseFloat($('#produto_valor_percentual_venda').val().replace(',',
+                    '.')) || 0;
+                var precoCusto = parseFloat($('#produto_preco_custo').val().replace(',', '.')) || 0;
+
+                if (percentualVenda !== 0) {
+                    // Calcular o preço de venda
+                    var precoVenda = precoCusto * (1 + percentualVenda / 100);
+
+                    // Formatando o valor com duas casas decimais
+                    precoVenda = precoVenda.toFixed(2);
+
+                    // Atualizar o campo de preço de venda
+                    $("#produto_preco_venda").val(precoVenda);
+                } else if (percentualVenda === 0) {
+                    $("#produto_preco_venda").val('0,00');
+                }
+            });
+
+            // Função para calcular e atualizar os campos de preços com base no percentual de venda
+            $('#produto_preco_custo').on('input', () => {
+                $("#produto_valor_percentual_venda").val('');
+                $("#produto_preco_venda").val('');
+            });
+
+            //Quando função on pois dá conflito com a mask o resultado sai incorreto
+            $('#produto_preco_venda').change(function(e) {
+                e.preventDefault();
+                var precoVenda = parseFloat($('#produto_preco_venda').val().replace(',', '.')) || 0;
+                var precoCusto = parseFloat($('#produto_preco_custo').val().replace(',', '.')) || 0;
+
+                // Verificar se há um valor válido no campo de preço de venda
+                if (!isNaN(precoVenda) && precoVenda !== 0) {
+                    // Calcular o percentual de venda
+                    var percentualVenda = ((precoVenda - precoCusto) / precoCusto) * 100;
+
+                    // Formatando o valor com duas casas decimais
+                    percentualVenda = percentualVenda.toFixed(2);
+
+                    // Atualizar o campo de percentual de venda
+                    $('#produto_valor_percentual_venda').val(percentualVenda);
+                } else {
+                    // Se o campo de preço de venda estiver vazio ou for 0, redefinir o percentual de venda
+                    $('#produto_valor_percentual_venda').val('');
+                }
+            });
+
+            //CALCULA A PORCENTAGEM DA COMISSÃO
+            $('#produto_preco_comissao').change(function(e) {
+                e.preventDefault();
+                var precoVenda = parseFloat($('#produto_preco_venda').val().replace(',', '.')) || 0;
+                var precoComissao = parseFloat($('#produto_preco_comissao').val().replace(',', '.')) || 0;
+
+                // Verificar se há um valor válido no campo de preço de venda
+                if ((!isNaN(precoComissao) && precoComissao !== 0) && !isNaN(precoVenda) && precoVenda !==
+                    0) {
+                    // Calcular o percentual de Comissao
+                    var percentualComissao = (precoComissao / precoVenda) * 100;
+
+                    // Formatando o valor com duas casas decimais
+                    percentualComissao = percentualComissao.toFixed(2);
+
+                    // Atualizar o campo de percentual de Comissao
+                    $('#produto_valor_percentual_comissao').val(percentualComissao);
+                } else {
+                    // Se o campo de preço de Comissao estiver vazio ou for 0, redefinir o percentual de Comissao
+                    $('#produto_valor_percentual_comissao').val('');
+                }
+            });
+
+            // Função para calcular e atualizar os campos de preços
+            $('#produto_valor_percentual_comissao').on('input', () => {
+                var percentualComissao = parseFloat($('#produto_valor_percentual_comissao').val().replace(
+                    ',',
+                    '.')) || 0;
+                var precoVenda = parseFloat($('#produto_preco_venda').val().replace(',', '.')) || 0;
+
+                if (percentualComissao !== 0) {
+                    // Calcular o preço de Comissao
+                    var precoComissao = percentualComissao * (precoVenda / 100);
+
+                    // Formatando o valor com duas casas decimais
+                    precoComissao = precoComissao.toFixed(2);
+
+                    // Atualizar o campo de preço de Comissao
+                    $("#produto_preco_comissao").val(precoComissao);
+                } else if (percentualComissao === 0) {
+                    $("#produto_preco_comissao").val('');
+                }
+            });
+
+        });
+    </script>
 </section>

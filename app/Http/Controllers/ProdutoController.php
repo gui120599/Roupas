@@ -84,28 +84,34 @@ class ProdutoController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateProdutoRequest $request, Produto $produto)
-    {
-        $produto->update([
-            'produto_descricao' => $request->input('produto_descricao'),
-            'produto_codigo_barras' => $request->input('produto_codigo_barras'),
-            'produto_referencia' => $request->input('produto_referencia'),
-            'produto_categoria_id' => $request->input('produto_categoria_id'),
-            'produto_foto' => $request->input('produto_foto'),
-            'produto_preco_custo' => $request->input('produto_preco_custo'),
-            'produto_valor_percentual_venda' => $request->input('produto_valor_percentual_venda'),
-            'produto_preco_venda' => $request->input('produto_preco_venda'),
-            'produto_valor_percentual_comissao' => $request->input('produto_valor_percentual_comissao'),
-            'produto_preco_comissao' => $request->input('produto_preco_comissao'),
-            'produto_preco_promocional' => $request->input('produto_preco_promocional'),
-            'produto_data_inicio_promocao' => $request->input('produto_data_inicio_promocao'),
-            'produto_data_final_promocao' => $request->input('produto_data_final_promocao'),
-            'produto_quantidade_minima' => $request->input('produto_quantidade_minima'),
-            'produto_quantidade_maxima' => $request->input('produto_quantidade_maxima'),
-        ]);
+{
+    $produto->update([
+        'produto_descricao' => $request->input('produto_descricao'),
+        'produto_codigo_barras' => $request->input('produto_codigo_barras'),
+        'produto_referencia' => $request->input('produto_referencia'),
+        'produto_categoria_id' => $request->input('produto_categoria_id'),
+        'produto_preco_custo' => $request->input('produto_preco_custo') ? str_replace(',', '.', $request->input('produto_preco_custo')) : '0.00',
+        'produto_valor_percentual_venda' => $request->input('produto_valor_percentual_venda') ? str_replace(',', '.', $request->input('produto_valor_percentual_venda')) : '0.00',
+        'produto_preco_venda' => $request->input('produto_preco_venda') ? str_replace(',', '.', $request->input('produto_preco_venda')) : '0.00',
+        'produto_valor_percentual_comissao' => $request->input('produto_valor_percentual_comissao') ? str_replace(',', '.', $request->input('produto_valor_percentual_comissao')) : '0.00',
+        'produto_preco_comissao' => $request->input('produto_preco_comissao') ? str_replace(',', '.', $request->input('produto_preco_comissao')) : '0.00',
+        'produto_preco_promocional' => $request->input('produto_preco_promocional') ? str_replace(',', '.', $request->input('produto_preco_promocional')) : '0.00',
+        'produto_data_inicio_promocao' => $request->input('produto_data_inicio_promocao'),
+        'produto_data_final_promocao' => $request->input('produto_data_final_promocao'),
+        'produto_quantidade_minima' => $request->input('produto_quantidade_minima'),
+        'produto_quantidade_maxima' => $request->input('produto_quantidade_maxima'),
+    ]);
 
-        // Redireciona para a página do produto recém-atualizado
-        return redirect()->route('produto')->with('success', 'Produto atualizado com sucesso!');
+    // Upload da nova foto, se presente
+    if ($request->hasFile('produto_foto')) {
+        $foto = $request->file('produto_foto');
+        $produto->saveFoto($foto);
     }
+
+    // Redireciona para a página do produto atualizado
+    return redirect()->route('produto')->with('success', 'Produto atualizado com sucesso!');
+}
+
 
     /**
      * Remove the specified resource from storage.
