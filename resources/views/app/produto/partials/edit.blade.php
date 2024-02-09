@@ -325,6 +325,9 @@
                 }
             });
 
+            // Função que seleciona a categoria do produto
+            $('#produto_categoria_id').val({{$produto->produto_categoria_id}});
+
         });
     </script>
 </section>
