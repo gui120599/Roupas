@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EntradaProdutoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/Entrada-Produto/{entrada_produto}', [EntradaProdutoController::class, 'update'])->name('entrada_produto.update');
     Route::get('/Ativar-Entrada-Produto/{id}', [EntradaProdutoController::class, 'active'])->name('entrada_produto.active');
     Route::delete('/Entrada-Produto/{id}', [EntradaProdutoController::class, 'destroy'])->name('entrada_produto.destroy');
+
+    Route::get('/Cliente', [ClienteController::class, 'index'])->name('cliente');
+    Route::get('/Clientes-Inativos', [ClienteController::class, 'inactive'])->name('cliente.inactive');
+    Route::post('/Cliente', [ClienteController::class, 'store'])->name('cliente.store');
+    Route::get('/Cliente/{cliente}', [ClienteController::class, 'show'])->name('cliente.show');
+    Route::get('/Cliente/{cliente}/Editar', [ClienteController::class, 'edit'])->name('cliente.edit');
+    Route::patch('/Cliente/{cliente}', [ClienteController::class, 'update'])->name('cliente.update');
+    Route::get('/Ativar-Cliente/{id}', [ClienteController::class, 'active'])->name('cliente.active');
+    Route::delete('/Cliente/{id}', [ClienteController::class, 'destroy'])->name('cliente.destroy');
 });
 
 require __DIR__ . '/auth.php';

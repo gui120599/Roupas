@@ -22,7 +22,7 @@
         </x-primary-button>
 
     </form>
-    <x-modal name="meuModal" :show="true">
+    <x-modal name="meuModal" :show="false">
         <!-- Conteúdo do seu modal -->
         <div class="p-4">
             <h2 class="text-lg font-semibold">Título do Modal</h2>

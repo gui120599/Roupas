@@ -32,7 +32,7 @@
         <i class='bx bxs-t-shirt'></i>
         <span class="text-[15px] ml-4 text-gray-200">{{ __('Produtos') }}</span>
     </x-nav-link>
-    <x-nav-link :href="route('produto')" :active="request()->routeIs('produto')">
+    <x-nav-link :href="route('cliente')" :active="request()->routeIs('cliente')">
         <i class='bx bx-user'></i>
         <span class="text-[15px] ml-4 text-gray-200">{{ __('Clientes') }}</span>
     </x-nav-link>
