@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\EntradaProduto;
 use App\Http\Requests\StoreEntradaProdutoRequest;
 use App\Http\Requests\UpdateEntradaProdutoRequest;
+use App\Models\Categoria;
+use App\Models\Produto;
 
 class EntradaProdutoController extends Controller
 {
@@ -13,7 +15,9 @@ class EntradaProdutoController extends Controller
      */
     public function index()
     {
-        return view('app.entrada_produto.index');
+        $categorias = Categoria::all();
+        $produtos = Produto::all();
+        return view('app.entrada_produto.index', ['categorias' => $categorias, 'produtos' => $produtos]);
     }
 
     /**
@@ -63,4 +67,13 @@ class EntradaProdutoController extends Controller
     {
         //
     }
+
+    /**
+     * Busca produto pelo codigo
+     */
+    public function produtoSelecionado(Produto $produto, $id)
+    {
+        
+    }
+
 }

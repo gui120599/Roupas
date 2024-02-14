@@ -36,6 +36,11 @@ class Produto extends Model
     {
         return $this->belongsTo(Categoria::class, 'produto_categoria_id');
     }
+    // Relacionamento com a tabela 'EntradaProdutos'
+    public function entradasProdutos()
+    {
+        return $this->hasMany(EntradaProduto::class, 'produto_id');
+    }
 
     public function saveFoto($foto)
     {

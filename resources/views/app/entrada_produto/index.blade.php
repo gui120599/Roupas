@@ -4,7 +4,6 @@
             <i class='bx bx-category-alt'></i>
             <a href="{{route('entrada_produto')}}">{{ __('Entradas de Produtos') }}</a>
         </h2>
-        
     </x-slot>
 
     <div class="py-6">

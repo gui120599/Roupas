@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('entrada_produtos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('entrada_produto_id');
+            $table->decimal('entrada_quantidade',7,2);
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('entrada_produto_id')->references('id')->on('produtos');
         });
     }
 
