@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Produto;
 use App\Http\Requests\StoreProdutoRequest;
 use App\Http\Requests\UpdateProdutoRequest;
+use Request;
 
 class ProdutoController extends Controller
 {

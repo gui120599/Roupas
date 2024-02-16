@@ -72,15 +72,9 @@
             $('.phone_ddd').mask('(00) 00000-0000');
             $('.phone_us').mask('(000) 000-0000');
             $('.mixed').mask('AAA 000-S0S');
-            $('.cpf').mask('000.000.000-00', {
-                reverse: true
-            });
-            $('.rg').mask('0000000', {
-                reverse: true
-            });
-            $('.cnpj').mask('000.000.000/0000-00', {
-                reverse: true
-            });
+            $('.cpf').mask('000.000.000-00');
+            $('.rg').mask('0000000');
+            $('.cnpj').mask('00.000.000/0000-00');
             $('.money').mask('#.##0,00', {
                 reverse: true
             });

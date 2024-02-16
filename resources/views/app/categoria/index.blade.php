@@ -10,13 +10,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                     @include('app.entrada_produto.partials.create') 
+                     @include('app.categoria.partials.create') 
                 </div>
             </div>
 
            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="w-full">
-                    @include('app.entrada_produto.partials.list') 
+                    @include('app.categoria.partials.list') 
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\EntradaProdutoController;
+use App\Http\Controllers\MovimentacaoProdutoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,14 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/Ativar-Produto/{id}', [ProdutoController::class, 'active'])->name('produto.active');
     Route::delete('/Produto/{id}', [ProdutoController::class, 'destroy'])->name('produto.destroy');
     
-    Route::get('/Entrada-Produto', [EntradaProdutoController::class, 'index'])->name('entrada_produto');
-    Route::get('/Produtos-Inativos', [EntradaProdutoController::class, 'inactive'])->name('entrada_produto.inactive');
-    Route::post('/Entrada-Produto', [EntradaProdutoController::class, 'store'])->name('entrada_produto.store');
-    Route::get('/Entrada-Produto/{entrada_produto}', [EntradaProdutoController::class, 'show'])->name('entrada_produto.show');
-    Route::get('/Entrada-Produto/{entrada_produto}/Editar', [EntradaProdutoController::class, 'edit'])->name('entrada_produto.edit');
-    Route::patch('/Entrada-Produto/{entrada_produto}', [EntradaProdutoController::class, 'update'])->name('entrada_produto.update');
-    Route::get('/Ativar-Entrada-Produto/{id}', [EntradaProdutoController::class, 'active'])->name('entrada_produto.active');
-    Route::delete('/Entrada-Produto/{id}', [EntradaProdutoController::class, 'destroy'])->name('entrada_produto.destroy');
+    Route::get('/Entrada-Produto', [MovimentacaoProdutoController::class, 'index'])->name('entrada_produto');
 
     Route::get('/Cliente', [ClienteController::class, 'index'])->name('cliente');
     Route::get('/Clientes-Inativos', [ClienteController::class, 'inactive'])->name('cliente.inactive');

@@ -164,23 +164,6 @@
                 </div>
             </div>
 
-            {{-- Quantidade em estoque --}}
-            <div class="col-span-full">
-                <hr class="h-px my-1 border-0 bg-gray-200">
-                <h2 class="flex items-center gap-x-2 text-lg font-bold text-teal-700">
-                    <i class='bx bxs-package'></i>
-                    <span>{{ __('Quantidade em Estoque') }}</span>
-                </h2>
-            </div>
-            <div class="md:col-span-full grid grid-cols-1 md:grid-cols-6 gap-x-4 gap-y-4">
-                <div class="lg:col-span-1 md:col-span-3">
-                    <x-input-label for="produto_quantidade_minima" :value="__('Quantidade')" />
-                    <x-text-input id="produto_quantidade_minima" name="produto_quantidade" type="text"
-                        class="mt-1 w-full" autocomplete="off" />
-                    <x-input-error :messages="$errors->updatePassword->get('produto_quantidade')" class="mt-2" />
-                </div>
-            </div>
-
         </div>
         <x-primary-button>
             {{ __('Cadastrar Novo Produto') }}
