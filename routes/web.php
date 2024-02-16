@@ -49,7 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/Ativar-Produto/{id}', [ProdutoController::class, 'active'])->name('produto.active');
     Route::delete('/Produto/{id}', [ProdutoController::class, 'destroy'])->name('produto.destroy');
     
-    Route::get('/Entrada-Produto', [MovimentacaoProdutoController::class, 'index'])->name('entrada_produto');
+    Route::get('/Entrada-Produto', [MovimentacaoProdutoController::class, 'indexEntrada'])->name('entrada_produto');
+    Route::post('/Entra-Produto', [MovimentacaoProdutoController::class, 'storeEntrada'])->name('mov_entrada.store');
 
     Route::get('/Cliente', [ClienteController::class, 'index'])->name('cliente');
     Route::get('/Clientes-Inativos', [ClienteController::class, 'inactive'])->name('cliente.inactive');

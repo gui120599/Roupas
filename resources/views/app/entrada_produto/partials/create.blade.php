@@ -5,22 +5,22 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __('Insira os dados para lançar qunatidade em estoque.') }}
+            {{ __('Insira os dados para lançar quantidade em estoque.') }}
         </p>
     </header>
     <x-secondary-button class="abrir-modal">
         <span class="my-2">{{ __('Selecionar Produto') }}</span>
     </x-secondary-button>
 
-    <form action="{{ route('categoria.store') }}" method="post" class="mt-4 space-y-6" enctype="multipart/form-data">
+    <form action="{{ route('mov_entrada.store') }}" method="post" class="mt-4 space-y-6" enctype="multipart/form-data">
         @csrf
         <div class="md:col-span-full grid grid-cols-1 md:grid-cols-6 gap-x-4">
             <div class="col-span-1 md:col-span-4 grid grid-cols-1 md:grid-cols-7 gap-x-4 gap-y-2">
                 <div class="col-span-1">
-                    <x-input-label for="movimentacao_produto_id" :value="__('Produto ID')" />
-                    <x-text-input id="movimentacao_produto_id" name="movimentacao_produto_id" type="text"
+                    <x-input-label for="mov_produto_id" :value="__('Produto ID')" />
+                    <x-text-input id="mov_produto_id" name="mov_produto_id" type="text"
                         class="mt-1 w-full" />
-                    <x-input-error :messages="$errors->updatePassword->get('movimentacao_produto_id')" class="mt-2" />
+                    <x-input-error :messages="$errors->updatePassword->get('mov_produto_id')" class="mt-2" />
                 </div>
                 <div class="col-span-6">
                     <x-input-label for="produto_descricao" :value="__('Descrição do Produto')" />
@@ -29,10 +29,15 @@
                     <x-input-error :messages="$errors->updatePassword->get('produto_descricao')" class="mt-2" />
                 </div>
                 <div class="col-span-3">
-                    <x-input-label for="movimentacao_quantidade" :value="__('Quantidade')" />
-                    <x-text-input id="movimentacao_quantidade" name="movimentacao_quantidade" type="text"
+                    <x-input-label for="mov_quantidade" :value="__('Quantidade')" />
+                    <x-text-input id="mov_quantidade" name="mov_quantidade" type="text"
                         class="mt-1 w-full" />
-                    <x-input-error :messages="$errors->updatePassword->get('movimentacao_quantidade')" class="mt-2" />
+                    <x-input-error :messages="$errors->updatePassword->get('mov_quantidade')" class="mt-2" />
+                </div>
+                <div class="hidden col-span-3">
+                    <x-input-label for="mov_tipo" :value="__('Tipo')" />
+                    <x-text-input id="mov_tipo" name="mov_tipo" type="text"
+                        class="mt-1 w-full" value="ENTRADA" />
                 </div>
             </div>
             <div class="col-span-1 md:col-span-2">
@@ -91,7 +96,7 @@
         </div>
         <script>
             function SelecionarProduto(id, produto_descricao, foto) {
-                $("#movimentacao_produto_id").val(id).prop('readonly', true);
+                $("#mov_produto_id").val(id).prop('readonly', true);
                 $("#produto_descricao").val(produto_descricao).prop('readonly', true);
                 $("#imagem-preview").attr("src", foto);
                 const modalContainer = document.querySelector('.modal-container');
