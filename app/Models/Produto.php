@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Produto extends Model
 {
@@ -37,9 +38,9 @@ class Produto extends Model
         return $this->belongsTo(Categoria::class, 'produto_categoria_id');
     }
     // Relacionamento com a tabela 'EntradaProdutos'
-    public function entradasProdutos()
+    public function mov_produto()
     {
-        return $this->hasMany(EntradaProduto::class, 'produto_id');
+        return $this->hasMany(MovimentacaoProduto::class, 'mov_produto_id');
     }
 
     public function saveFoto($foto)
@@ -49,5 +50,11 @@ class Produto extends Model
         $foto->move($caminho, $nomeArquivo);
         $this->produto_foto = $nomeArquivo;
         $this->save();
+    }
+    public function saldo()
+    {
+        return $this->mov_produto()
+            ->selectRaw('SUM(CASE WHEN mov_tipo = "ENTRADA" THEN mov_quantidade ELSE -mov_quantidade END) as saldo')
+            ->groupBy('mov_produto_id');
     }
 }

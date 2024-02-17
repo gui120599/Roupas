@@ -19,6 +19,15 @@ class MovimentacaoProduto extends Model
         'mov_user_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class,'mov_user_id');
+    }
+    public function produto()
+    {
+        return $this->belongsTo(Produto::class,'mov_produto_id');
+    }
+
     protected static function booted()
     {
         static::creating(function ($movimentacaoProduto) {

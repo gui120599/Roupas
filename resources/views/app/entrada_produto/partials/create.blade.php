@@ -1,43 +1,42 @@
 <section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Realizar movimentacao de Mercadoria/Produtos') }}
-        </h2>
+    <div class="space-y-2">
+        <header>
+            <h2 class="text-lg font-medium text-gray-900">
+                {{ __('Realizar movimentacao de Mercadoria/Produtos') }}
+            </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Insira os dados para lançar quantidade em estoque.') }}
-        </p>
-    </header>
-    <x-secondary-button class="abrir-modal">
-        <span class="my-2">{{ __('Selecionar Produto') }}</span>
-    </x-secondary-button>
-
-    <form action="{{ route('mov_entrada.store') }}" method="post" class="mt-4 space-y-6" enctype="multipart/form-data">
+            <p class="mt-1 text-sm text-gray-600">
+                {{ __('Insira os dados para lançar quantidade em estoque.') }}
+            </p>
+        </header>
+        <x-secondary-button class="abrir-modal">
+            <span class="my-2">{{ __('Selecionar Produto') }}</span>
+        </x-secondary-button>
+    </div>
+    <form action="{{ route('mov_entrada.store') }}" method="post" id="form-entrada" class="hidden mt-4"
+        enctype="multipart/form-data">
         @csrf
         <div class="md:col-span-full grid grid-cols-1 md:grid-cols-6 gap-x-4">
             <div class="col-span-1 md:col-span-4 grid grid-cols-1 md:grid-cols-7 gap-x-4 gap-y-2">
                 <div class="col-span-1">
                     <x-input-label for="mov_produto_id" :value="__('Produto ID')" />
-                    <x-text-input id="mov_produto_id" name="mov_produto_id" type="text"
-                        class="mt-1 w-full" />
+                    <x-text-input id="mov_produto_id" name="mov_produto_id" type="text" class="mt-1 w-full" />
                     <x-input-error :messages="$errors->updatePassword->get('mov_produto_id')" class="mt-2" />
                 </div>
                 <div class="col-span-6">
                     <x-input-label for="produto_descricao" :value="__('Descrição do Produto')" />
                     <x-text-input id="produto_descricao" name="produto_descricao" type="text" class="mt-1 w-full"
-                        autocomplete="off" autofocus />
+                        autocomplete="off" />
                     <x-input-error :messages="$errors->updatePassword->get('produto_descricao')" class="mt-2" />
                 </div>
                 <div class="col-span-3">
                     <x-input-label for="mov_quantidade" :value="__('Quantidade')" />
-                    <x-text-input id="mov_quantidade" name="mov_quantidade" type="text"
-                        class="mt-1 w-full" />
+                    <x-text-input id="mov_quantidade" name="mov_quantidade" type="text" class="mt-1 w-full" />
                     <x-input-error :messages="$errors->updatePassword->get('mov_quantidade')" class="mt-2" />
                 </div>
                 <div class="hidden col-span-3">
                     <x-input-label for="mov_tipo" :value="__('Tipo')" />
-                    <x-text-input id="mov_tipo" name="mov_tipo" type="text"
-                        class="mt-1 w-full" value="ENTRADA" />
+                    <x-text-input id="mov_tipo" name="mov_tipo" type="text" class="mt-1 w-full" value="ENTRADA" />
                 </div>
             </div>
             <div class="col-span-1 md:col-span-2">
@@ -66,29 +65,40 @@
         <h2>Produtos cadastrados!</h2>
     @endsection
     @section('content_modal')
-        <div class="p-4 ">
+        <div class="p-4 space-y-2 ">
+            <x-text-input-buscar type="text" class="mt-1 w-full" id="campoPesquisa"
+                placeholder="Pesquisar por descrição do produto" />
             <table class="w-full text-center">
                 <tbody>
                     @foreach ($produtos as $produto)
                         @if ($produto->produto_foto)
-                            <tr class="border hover:bg-gray-200 cursor-pointer"
+                            <tr class="produto-row border hover:bg-gray-200 cursor-pointer"
                                 onclick="SelecionarProduto({{ $produto->id }},'{{ $produto->produto_descricao }}','{{ asset('img/fotos_produtos/' . $produto->produto_foto) }}')">
                             @else
-                            <tr class="border hover:bg-gray-200 cursor-pointer"
-                                onclick="SelecionarProduto({{ $produto->id }},'{{ $produto->produto_descricao }}','{{ asset('Sem Imagem.png') }}')">
+                            <tr class="produto-row border hover:bg-gray-200 cursor-pointer"
+                                onclick="SelecionarProduto({{ $produto->id }},'{{ $produto->produto_descricao }}','{{ asset('img/fotos_produtos/' . $produto->produto_foto) }}')">
                         @endif
-                        <td class=" align-center ">
+                        <td class="align-center">
                             @if ($produto->produto_foto)
-                                <img id="imagem-preview" class="mx-auto border rounded-full object-contain w-16 h-16"
+                                <img class="mx-auto border rounded-full object-contain w-16 h-16"
                                     src="{{ asset('img/fotos_produtos/' . $produto->produto_foto) }}" />
                             @else
-                                <img id="imagem-preview" class="mx-auto border rounded-full object-contain w-16 h-16"
+                                <img class="mx-auto border rounded-full object-contain w-16 h-16"
                                     src="{{ asset('Sem Imagem.png') }}" alt="Imagem Padrão">
                             @endif
                         </td>
-                        <td class="">{{ $produto->id }}</td>
-                        <td class="">{{ $produto->produto_descricao }}</td>
-                        <td class="">{{ $produto->categoria->categoria_nome }}</td>
+                        <td class="produto-id">{{ $produto->id }}</td>
+                        <td class="produto-descricao">
+                            @if (isset($produto->produto_referencia) && $produto->produto_referencia !== null)
+                                {{ $produto->produto_descricao }} -
+                                <span>Ref.
+                                    {{ $produto->produto_referencia }}</span>
+                            @else
+                                {{ $produto->produto_descricao }}
+                            @endif
+                        </td>
+                        <td class="categoria-nome">{{ $produto->categoria->categoria_nome }}</td>
+                        <td class="produto-saldo">{{ $produto->saldo->first()->saldo ?? 0 }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -102,7 +112,29 @@
                 const modalContainer = document.querySelector('.modal-container');
                 modalContainer.classList.toggle(
                     "hidden");
+                $("#form-entrada").slideDown();
+                $("#mov_quantidade").focus();
             }
+        </script>
+
+        <script type="module">
+            $(document).ready(function() {
+                $("#campoPesquisa").on("input", function() {
+                    var termoPesquisa = $(this).val().toLowerCase();
+
+                    $(".produto-row").each(function() {
+                        var descricaoProduto = $(this).find(".produto-descricao").text().toLowerCase();
+                        var categoriaNome = $(this).find(".categoria-nome").text().toLowerCase();
+
+                        if (descricaoProduto.includes(termoPesquisa) || categoriaNome.includes(
+                                termoPesquisa)) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                });
+            });
         </script>
     @endsection
 

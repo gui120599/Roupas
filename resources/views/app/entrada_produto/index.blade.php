@@ -14,13 +14,13 @@
                 </div>
             </div>
 
-           {{-- <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="w-full">
-                    @include('app.categoria.partials.list') 
+                    @include('app.entrada_produto.partials.list') 
                 </div>
             </div> 
 
-             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            {{-- <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.delete-user-form')
                 </div>

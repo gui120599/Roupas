@@ -19,7 +19,7 @@
             <tbody>
                 @if(count($categorias) > 0)
                     @foreach ($categorias as $categoria)
-                        <tr class="border-top border-gray-300">
+                        <tr class="border-b-2 border-gray-100">
                             <td>{{ $categoria->id }}</td>
                             <td>{{ $categoria->categoria_nome }}</td>
                             <td>

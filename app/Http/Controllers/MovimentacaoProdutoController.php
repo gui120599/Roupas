@@ -13,11 +13,16 @@ class MovimentacaoProdutoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function indexEntrada(Produto $produto, Categoria $categoria)
+    public function indexEntrada(MovimentacaoProduto $mov_produto, Categoria $categoria)
     {
         $categorias = $categoria::all();
-        $produtos = $produto::all();
-        return view('app.entrada_produto.index', ['produtos' => $produtos, 'categorias' => $categorias]);
+        $mov_produtos = $mov_produto::all();
+        $produtos = Produto::with(['mov_produto' => function ($query) {
+            $query->selectRaw('mov_produto_id, SUM(CASE WHEN mov_tipo = "ENTRADA" THEN mov_quantidade ELSE -mov_quantidade END) as saldo')
+                ->groupBy('mov_produto_id');
+        }])->get();
+
+        return view('app.entrada_produto.index', ['mov_produtos' => $mov_produtos, 'produtos' => $produtos, 'categorias' => $categorias]);
     }
 
     /**
@@ -36,7 +41,7 @@ class MovimentacaoProdutoController extends Controller
         // Crie uma nova instância do modelo e atribua os valores
         $movimentacaoProduto = new MovimentacaoProduto([
             'mov_produto_id' => $request->input('mov_produto_id'),
-            'mov_quantidade' => $request->input('mov_quantidade'),
+            'mov_quantidade' => str_replace(',', '.', $request->input('mov_quantidade')),
             'mov_tipo' => $request->input('mov_tipo'),
             'mov_motivo' => $request->input('mov_motivo'),
             'mov_venda_id' => $request->input('mov_venda_id'),
