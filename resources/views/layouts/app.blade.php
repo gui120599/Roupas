@@ -49,7 +49,7 @@
     </div>
     <!-- Modal -->
     <div
-        class="modal-container hidden h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 animate-[from_1s_ease-in-out_infinite]">
+        class="modal-container z-50 hidden h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 animate-[from_1s_ease-in-out_infinite]">
         <div class="bg-white rounded shadow-lg w-11/12 xl:w-1/2" style="max-height: 80vh; overflow-y: auto;">
             <!-- Modal Header -->
             <div class="border-b px-4 py-2 flex justify-between items-center">

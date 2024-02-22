@@ -11,7 +11,7 @@ class StoreClienteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class StoreClienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'cliente_nome' => 'required|string|max:255',
+            'cliente_data_nascimento' => 'required|date',
+            'cliente_tipo' => 'required|string|max:255',
+            'cliente_cpf' => 'nullable|string|max:20', // Pode ser nulo, mas se fornecido, deve ser uma string com no máximo 20 caracteres
+            'cliente_rg' => 'nullable|string|max:20',
+            'cliente_cnpj' => 'nullable|string|max:20',
+            'cliente_celular' => 'nullable|string|max:20',
+            'cliente_email' => 'nullable|email|max:255',
+            'cliente_endereco' => 'nullable|string|max:255',
+            'cliente_bairro' => 'nullable|string|max:255',
+            'cliente_cidade' => 'nullable|string|max:255',
+            'cliente_estado' => 'nullable|string|max:255',
+            'cliente_uf_estado' => 'nullable|string|max:2',
+            'cliente_cep' => 'nullable|string|max:15',
+            'cliente_foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Exemplo de validação para imagem
         ];
     }
 }

@@ -32,8 +32,8 @@
                             <select id="cliente_tipo" name="cliente_tipo" type="text"
                                 class="mt-1 w-full border-gray-300 focus:border-black focus:ring-black rounded-md shadow-sm cursor-pointer"
                                 autocomplete="off">
-                                <option value="Pessoa Fisica">Pessoa Fisica</option>
-                                <option value="Pessoa Jurídica">Pessoa Jurídica</option>
+                                <option value="Fisica">Pessoa Fisica</option>
+                                <option value="Juridica">Pessoa Jurídica</option>
                             </select>
                             <x-input-error :messages="$errors->updatePassword->get('cliente_tipo')" class="mt-2" />
                         </div>
@@ -179,11 +179,11 @@
             .toLowerCase(); // Garante que é minúsculo e sem espaços extras
                 console.log(tipo);
                 switch (tipo) {
-                    case 'pessoa jurídica':
+                    case 'juridica':
                         $("#fisica").hide();
                         $("#juridica").show();
                         break;
-                    case 'pessoa fisica':
+                    case 'fisica':
                         $("#fisica").show();
                         $("#juridica").hide();
                         break;

@@ -39,6 +39,19 @@
                     @include('app.cliente.partials.create')
                 </div>
             </div>
+            @if ($errors->any())
+                <div class="p-4 bg-white shadow sm:rounded-lg clientes-section">
+                    <div class="w-full">
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <div class="p-4 bg-white shadow sm:rounded-lg clientes-section">
                 <div class="w-full">
@@ -58,22 +71,22 @@
         }
     </style>
     <script type="module">
-    $(document).ready(function() {
-        // Oculta todas as seções ao carregar a página
-        $('.cadastrar-clientes-section').hide();
+        $(document).ready(function() {
+            // Oculta todas as seções ao carregar a página
+            $('.cadastrar-clientes-section').hide();
 
-        // Mostra a seção correspondente quando um link da navegação é clicado
-        $('.nav-link').click(function() {
-            var targetSection = $(this).data('section');
-            
-            // Oculta todas as seções e mostra apenas a correspondente
-            $('.max-w-7xl .bg-white').hide();
-            $('.' + targetSection).show();
+            // Mostra a seção correspondente quando um link da navegação é clicado
+            $('.nav-link').click(function() {
+                var targetSection = $(this).data('section');
 
-            // Destaca visualmente o link ativo
-            $('.nav-link').removeClass('active');
-            $(this).addClass('active');
+                // Oculta todas as seções e mostra apenas a correspondente
+                $('.max-w-7xl .bg-white').hide();
+                $('.' + targetSection).show();
+
+                // Destaca visualmente o link ativo
+                $('.nav-link').removeClass('active');
+                $(this).addClass('active');
+            });
         });
-    });
     </script>
 </x-app-layout>
