@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CaixaController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ClienteController;
@@ -60,6 +61,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/Cliente/{cliente}', [ClienteController::class, 'update'])->name('cliente.update');
     Route::get('/Ativar-Cliente/{id}', [ClienteController::class, 'active'])->name('cliente.active');
     Route::delete('/Cliente/{id}', [ClienteController::class, 'destroy'])->name('cliente.destroy');
+
+    Route::get('/Caixa', [CaixaController::class, 'index'])->name('caixa');
+    Route::get('/Caixas-Inativas', [CaixaController::class, 'inactive'])->name('Caixa.inactive');
+    Route::post('/Caixa', [CaixaController::class, 'store'])->name('Caixa.store');
+    Route::get('/Caixa/{Caixa}', [CaixaController::class, 'show'])->name('Caixa.show');
+    Route::get('/Caixa/{Caixa}/Editar', [CaixaController::class, 'edit'])->name('Caixa.edit');
+    Route::patch('/Caixa/{Caixa}', [CaixaController::class, 'update'])->name('Caixa.update');
+    Route::get('/Ativar-Caixa/{id}', [CaixaController::class, 'active'])->name('Caixa.active');
+    Route::delete('/Caixa/{id}', [CaixaController::class, 'destroy'])->name('Caixa.destroy');
 });
 
 require __DIR__ . '/auth.php';

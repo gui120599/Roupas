@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
+use Carbon\Carbon;
 
 class ClienteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Cliente $cliente)
     {
-        return view('app.cliente.index');
+        $clientes = $cliente::all();
+        return view('app.cliente.index', ['clientes' => $clientes]);
     }
 
     /**
@@ -31,22 +33,12 @@ class ClienteController extends Controller
     {
 
         // Criar um novo cliente com base nos dados recebidos
-        $cliente = new Cliente([
-            'cliente_nome' => $request->input('cliente_nome'),
-            'cliente_data_nascimento' => $request->input('cliente_data_nascimento'),
-            'cliente_tipo' => $request->input('cliente_tipo'),
-            'cliente_cpf' => $request->input('cliente_cpf'),
-            'cliente_rg' => $request->input('cliente_rg'),
-            'cliente_cnpj' => $request->input('cliente_cnpj'),
-            'cliente_celular' => $request->input('cliente_celular'),
-            'cliente_email' => $request->input('cliente_email'),
-            'cliente_endereco' => $request->input('cliente_endereco'),
-            'cliente_bairro' => $request->input('cliente_bairro'),
-            'cliente_cidade' => $request->input('cliente_cidade'),
-            'cliente_estado' => $request->input('cliente_estado'),
-            'cliente_uf_estado' => $request->input('cliente_uf_estado'),
-            'cliente_cep' => $request->input('cliente_cep'),
-        ]);
+        // Formatar a data para o formato correto
+        $clienteData = $request->all();
+        $clienteData['cliente_data_nascimento'] = Carbon::createFromFormat('d/m/Y', $request->input('cliente_data_nascimento'));
+
+        // Criar um novo cliente
+        $cliente = new Cliente($clienteData);
 
         // Salvar a foto se presente
         if ($request->hasFile('cliente_foto')) {
@@ -57,9 +49,9 @@ class ClienteController extends Controller
         // Salvar o cliente no banco de dados
         $cliente->save();
 
+
         // Redirecionar ou retornar a resposta desejada
-        return redirect()->route('clientes.index')->with('success', 'Cliente criado com sucesso!');
-    
+        return redirect()->route('cliente')->with('success', 'Cliente criado com sucesso!');
     }
 
     /**

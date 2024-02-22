@@ -30,18 +30,19 @@ class Cliente extends Model
         'cliente_foto', // Novo campo adicionado
     ];
 
-    protected $dates = [
-        'cliente_data_nascimento',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+    protected $casts = [
+        'cliente_data_nascimento' => 'date',
+        'created_at'=> 'datetime',
+        'updated_at'=> 'datetime',
+        'deleted_at'=> 'datetime',
     ];
+
     public function saveFoto($foto)
     {
         $nomeArquivo = time() . '.' . $foto->getClientOriginalExtension();
         $caminho = public_path('/img/fotos_clientes');
         $foto->move($caminho, $nomeArquivo);
-        $this->produto_foto = $nomeArquivo;
+        $this->cliente_foto = $nomeArquivo;
         $this->save();
     }
 }

@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="pl-4 text-sm font-thin mt-2 w-4/5 mx-auto transition duration-700 ease-in-out" id="submenu-finan">
-        <x-nav-link :href="route('produto')" :active="request()->routeIs('produto')">
+        <x-nav-link :href="route('caixa')" :active="request()->routeIs('caixa')">
             <i class='bx bx-dollar'></i>
             <span class="text-[15px] ml-4 text-gray-200">{{ __('Caixa') }}</span>
         </x-nav-link>

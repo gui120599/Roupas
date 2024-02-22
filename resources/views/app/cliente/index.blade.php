@@ -10,16 +10,16 @@
                 <div class="flex justify-center h-8">
                     <!-- Navigation Links -->
                     <div class="space-x-8 sm:ms-10 flex ">
-                        <div class="nav-link active cursor-pointer inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-light leading-5 text-gray-500 hover:border-white focus:outline-none focus:text-white focus:border-white transition duration-150 ease-in-out"
-                            data-section="clientes-section">
+                        <div class="section-list-link nav-link active cursor-pointer inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-light leading-5 text-gray-500 hover:border-white focus:outline-none focus:text-white focus:border-white transition duration-150 ease-in-out"
+                            data-section="section-list">
                             <div class="flex items-center">
                                 <i class='bx bxs-package me-2'></i>
                                 {{ __('Clientes') }}
                             </div>
                         </div>
 
-                        <div class="nav-link cursor-pointer inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-light leading-5 text-gray-500 hover:border-white focus:outline-none focus:text-white focus:border-white transition duration-150 ease-in-out"
-                            data-section="cadastrar-clientes-section">
+                        <div class="section-create-link nav-link cursor-pointer inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-light leading-5 text-gray-500 hover:border-white focus:outline-none focus:text-white focus:border-white transition duration-150 ease-in-out"
+                            data-section="section-create">
                             <div class="flex items-center">
                                 <i class='bx bx-plus me-2'></i>
                                 {{ __('Cadastrar Clientes') }}
@@ -34,26 +34,13 @@
 
     <div class="py-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg cadastrar-clientes-section">
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg cadastrar-clientes-section section-create">
                 <div class="w-full">
                     @include('app.cliente.partials.create')
                 </div>
             </div>
-            @if ($errors->any())
-                <div class="p-4 bg-white shadow sm:rounded-lg clientes-section">
-                    <div class="w-full">
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            @endif
 
-            <div class="p-4 bg-white shadow sm:rounded-lg clientes-section">
+            <div class="p-4 bg-white shadow sm:rounded-lg clientes-section section-list">
                 <div class="w-full">
                     @include('app.cliente.partials.list')
                 </div>
