@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('caixas', function (Blueprint $table) {
+        Schema::create('movimentacao_sessao_caixas', function (Blueprint $table) {
             $table->id();
-            $table->string('caixa_nome');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('caixas');
+        Schema::dropIfExists('movimentacao_sessao_caixas');
     }
 };

@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('caixas', function (Blueprint $table) {
+        Schema::create('opcoes_pagamentos', function (Blueprint $table) {
             $table->id();
-            $table->string('caixa_nome');
+            $table->string('opcaopag_nome');
+            $table->enum('opcaopag_tipo_taxa',['N/A','DESCONTAR','ACRESCENTAR'])->default('N/A')->nullable();
+            $table->decimal('opcaopag_valor_precentual_taxa',7,2)->default('0.00')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('caixas');
+        Schema::dropIfExists('opcoes_pagamentos');
     }
 };
