@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('itens_vendas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('item_venda_produto_id');
+            $table->unsignedBigInteger('item_venda_venda_id');
+            $table->decimal('item_venda_quantidade',7,2)->default('0.00');
+            $table->decimal('item_venda_preco_unitario',7,2)->default('0.00');
+            $table->decimal('item_venda_preco_total',7,2)->default('0.00');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('item_venda_produto_id')->references('id')->on('produtos');
+            $table->foreign('item_venda_venda_id')->references('id')->on('vendas');
         });
     }
 

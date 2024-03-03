@@ -25,8 +25,8 @@ return new class extends Migration
             $table->softDeletes();
 
             //Chaves estrangeiras
-            $table->foreign('sessaocaixa_caixa_id')->references('caixas')->on('id');
-            $table->foreign('sessaocaixa_user_id')->references('users')->on('id');
+            $table->foreign('sessaocaixa_caixa_id')->references('id')->on('caixas');
+            $table->foreign('sessaocaixa_user_id')->references('id')->on('users');
         });
     }
 

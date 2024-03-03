@@ -1,26 +1,27 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Atualizar Categoria') }}
+            {{ __('Nova Caixa') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __('Insira os dados para a categoria.') }}
+            {{ __('Insira os dados para a nova caixa.') }}
         </p>
     </header>
 
-    <form action="{{ route('categoria.update', ['categoria'  => $categoria]) }}" method="post" class="mt-6 space-y-6" enctype="multipart/form-data">
+    <form action="{{ route('caixa.update', ['caixa' => $caixa]) }}" method="post" class="mt-6 space-y-6">
         @csrf
         @method('patch')
 
         <div>
-            <x-input-label for="categoria_nome" :value="__('Nome do Categoria')" />
-            <x-text-input id="categoria_nome" name="categoria_nome" type="text" class="mt-1 w-full" autocomplete="off" value="{{ $categoria->categoria_nome }}" autofocus/>
-            <x-input-error :messages="$errors->updatePassword->get('categoria_nome')" class="mt-2" />
+            <x-input-label for="caixa_nome" :value="__('Nome da Caixa')" />
+            <x-text-input id="caixa_nome" name="caixa_nome" type="text" class="mt-1 w-full"
+                value="{{ $caixa->caixa_nome }}" autocomplete="off" autofocus />
+            <x-input-error :messages="$errors->updatePassword->get('caixa_nome')" class="mt-2" />
         </div>
-        <x-primary-button>
-            {{ __('Atualizar Categoria') }}
-        </x-primary-button>
 
+        <x-primary-button>
+            {{ __('Atualizar Caixa') }}
+        </x-primary-button>
     </form>
 </section>

@@ -2,17 +2,17 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight flex items-center space-x-2">
             <i class='bx bx-category-alt'></i>
-            <a href="{{route('categoria')}}">{{ __('Categorias') }}</a>
+            <a href="{{route('caixa')}}">{{ __('Caixas') }}</a>
         </h2>
     </x-slot>
 
-    {{--<div class="py-6">
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="w-full">
                     <header>
                         <h2 class="text-lg font-medium text-gray-900">
-                            {{ __('Categorias Inativadas') }}
+                            {{ __('Caixas Inativados') }}
                         </h2>
                     </header>
                     <div class="w-[18rem] sm:w-[99%] overflow-auto mx-auto h-2/4">
@@ -26,22 +26,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($categorias) > 0)
-                                    @foreach ($categorias as $categoria)
+                                @if (count($caixas) > 0)
+                                    @foreach ($caixas as $caixa)
                                         <tr class="border-top border-gray-300">
-                                            <td>{{ $categoria->id }}</td>
-                                            <td>{{ $categoria->categoria_nome }}</td>
+                                            <td>{{ $caixa->id }}</td>
+                                            <td>{{ $caixa->caixa_nome }}</td>
                                             <td>
                                                 <div class="flex items-center justify-center space-x-4">
                                                     <x-primary-button
-                                                        onclick="window.location.href = '{{ route('categoria.active', ['id' => $categoria->id]) }}'">Ativar</x-primary-button>
+                                                        onclick="window.location.href = '{{ route('caixa.active', ['id' => $caixa->id]) }}'">Ativar</x-primary-button>
                                                 </div>
                                             </td>
                                         </tr>
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="3" class="text-center py-4">Nenhuma categoria encontrada.</td>
+                                        <td colspan="3" class="text-center py-4">Nenhum caixa encontrado.</td>
                                     </tr>
                                 @endif
                             </tbody>
@@ -50,5 +50,5 @@
                 </div>
             </div>
         </div>
-    </div>--}}
+    </div>
 </x-app-layout>

@@ -30,7 +30,9 @@ class CaixaController extends Controller
      */
     public function store(StoreCaixaRequest $request)
     {
-        //
+        Caixa::create($request->all());
+
+        return redirect()->route('caixa')->with('success', 'Caixa criado com sucesso!');
     }
 
     /**
@@ -38,7 +40,7 @@ class CaixaController extends Controller
      */
     public function show(Caixa $caixa)
     {
-        //
+        return view('app.caixa.show',['caixa' => $caixa]);
     }
 
     /**
@@ -46,7 +48,7 @@ class CaixaController extends Controller
      */
     public function edit(Caixa $caixa)
     {
-        //
+        return view('app.caixa.edit',['caixa' => $caixa]);
     }
 
     /**
@@ -54,14 +56,50 @@ class CaixaController extends Controller
      */
     public function update(UpdateCaixaRequest $request, Caixa $caixa)
     {
-        //
+        $caixa->update($request->all());
+
+        return redirect()->route('caixa')->with('success', 'Caixa atualizado com sucesso!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remover o recurso especificado do armazenamento.
      */
-    public function destroy(Caixa $caixa)
+    public function destroy(Caixa $caixa, $id)
     {
-        //
+        $caixa = Caixa::find($id);
+
+        if (!$caixa) {
+            return redirect('/Caixa')->with('error', 'Caixa não encontrado!');
+        }
+
+        $caixa->delete();
+
+        return redirect('/Caixa')->with('success', 'Caixa Inativado com sucesso');
+    }
+
+      /**
+     * Exibir formulário para Caixas Inativos.
+     */
+    public function inactive()
+    {
+        $caixasInativos = Caixa::onlyTrashed()->get();
+
+        return view('app.caixa.inactive', ['caixas' => $caixasInativos]);
+    }
+
+    /**
+     * Ativar objeto Caixa.
+     */
+    public function active(Caixa $caixa, $id)
+    {
+        $caixa = Caixa::withTrashed()->find($id);
+
+        if (!$caixa) {
+            return redirect('/Caixa')->with('error', 'Caixa não encontrado!');
+        }
+
+        $caixa->restore();
+
+        return redirect('/Caixa')->with('success', 'Caixa ativado com sucesso');
     }
 }

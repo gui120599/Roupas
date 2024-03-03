@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('venda_sessaocaixa_id');
             $table->unsignedBigInteger('venda_cliente_id')->default(null)->nullable();
-            $table->enum('venda_status',['INICIADA','FINALIZADA'])->default('INICIADA');
+            $table->enum('venda_status',['INICIADA','FINALIZADA','CANCELADA'])->default('INICIADA');
             $table->enum('venda_status_pagamento',['RECEBIDO TOTAL','RECEBIDO PARCIAL','NÃO RECEBIDO'])->default('RECEBIDO TOTAL');
             $table->string('venda_descricao_pagamento');
             $table->decimal('venda_valor_dinheiro',7,2)->default('0.00')->nullable();
@@ -25,9 +25,13 @@ return new class extends Migration
             $table->integer('venda_quantidade_parcelas')->nullable();
             $table->decimal('venda_valor_entrada',7,2)->default('0.00')->nullable();
             $table->decimal('venda_valor_parcelado',7,2)->default('0.00')->nullable();
+            $table->text('venda_motivo_cancelamento')->default(null)->nullable();
             
+            $table->foreign('venda_sessaocaixa_id')->references('id')->on('sessao_caixas');
+            $table->foreign('venda_cliente_id')->references('id')->on('clientes');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

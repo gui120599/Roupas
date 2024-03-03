@@ -63,13 +63,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/Cliente/{id}', [ClienteController::class, 'destroy'])->name('cliente.destroy');
 
     Route::get('/Caixa', [CaixaController::class, 'index'])->name('caixa');
-    Route::get('/Caixas-Inativas', [CaixaController::class, 'inactive'])->name('Caixa.inactive');
-    Route::post('/Caixa', [CaixaController::class, 'store'])->name('Caixa.store');
-    Route::get('/Caixa/{Caixa}', [CaixaController::class, 'show'])->name('Caixa.show');
-    Route::get('/Caixa/{Caixa}/Editar', [CaixaController::class, 'edit'])->name('Caixa.edit');
-    Route::patch('/Caixa/{Caixa}', [CaixaController::class, 'update'])->name('Caixa.update');
-    Route::get('/Ativar-Caixa/{id}', [CaixaController::class, 'active'])->name('Caixa.active');
-    Route::delete('/Caixa/{id}', [CaixaController::class, 'destroy'])->name('Caixa.destroy');
+    Route::get('/Caixas-Inativas', [CaixaController::class, 'inactive'])->name('caixa.inactive');
+    Route::post('/Caixa', [CaixaController::class, 'store'])->name('caixa.store');
+    Route::get('/Caixa/{caixa}', [CaixaController::class, 'show'])->name('caixa.show');
+    Route::get('/Caixa/{caixa}/Editar', [CaixaController::class, 'edit'])->name('caixa.edit');
+    Route::patch('/Caixa/{caixa}', [CaixaController::class, 'update'])->name('caixa.update');
+    Route::get('/Ativar-Caixa/{id}', [CaixaController::class, 'active'])->name('caixa.active');
+    Route::delete('/Caixa/{id}', [CaixaController::class, 'destroy'])->name('caixa.destroy');
 });
 
 require __DIR__ . '/auth.php';
