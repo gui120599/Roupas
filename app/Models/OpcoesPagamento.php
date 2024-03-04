@@ -15,11 +15,11 @@ class OpcoesPagamento extends Model
     protected $fillable = [
         'opcaopag_nome',
         'opcaopag_tipo_taxa',
-        'opcaopag_valor_precentual_taxa',
+        'opcaopag_valor_percentual_taxa',
     ];
 
     protected $casts = [
-        'opcaopag_valor_precentual_taxa' => 'decimal:2',
+        'opcaopag_valor_percentual_taxa' => 'decimal:2',
     ];
 
     protected $dates = [

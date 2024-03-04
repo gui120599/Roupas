@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CaixaController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\OpcoesPagamentoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\MovimentacaoProdutoController;
@@ -70,6 +71,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/Caixa/{caixa}', [CaixaController::class, 'update'])->name('caixa.update');
     Route::get('/Ativar-Caixa/{id}', [CaixaController::class, 'active'])->name('caixa.active');
     Route::delete('/Caixa/{id}', [CaixaController::class, 'destroy'])->name('caixa.destroy');
+    
+    Route::get('/OpcoesPagamentos', [OpcoesPagamentoController::class, 'index'])->name('opcoes_pagamentos');
+    Route::get('/OpcoesPagamentoss-Inativas', [OpcoesPagamentoController::class, 'inactive'])->name('opcoes_pagamentos.inactive');
+    Route::post('/OpcoesPagamentos', [OpcoesPagamentoController::class, 'store'])->name('opcoes_pagamentos.store');
+    Route::get('/OpcoesPagamentos/{opcoes_pagamentos}', [OpcoesPagamentoController::class, 'show'])->name('opcoes_pagamentos.show');
+    Route::get('/OpcoesPagamentos/{opcoes_pagamentos}/Editar', [OpcoesPagamentoController::class, 'edit'])->name('opcoes_pagamentos.edit');
+    Route::patch('/OpcoesPagamentos/{opcoes_pagamentos}', [OpcoesPagamentoController::class, 'update'])->name('opcoes_pagamentos.update');
+    Route::get('/Ativar-OpcoesPagamentos/{id}', [OpcoesPagamentoController::class, 'active'])->name('opcoes_pagamentos.active');
+    Route::delete('/OpcoesPagamentos/{id}', [OpcoesPagamentoController::class, 'destroy'])->name('opcoes_pagamentos.destroy');
 });
 
 require __DIR__ . '/auth.php';

@@ -60,6 +60,10 @@
             <i class='bx bx-dollar'></i>
             <span class="text-[15px] ml-4 text-gray-200">{{ __('Caixa') }}</span>
         </x-nav-link>
+        <x-nav-link :href="route('opcoes_pagamentos')" :active="request()->routeIs('opcoes_pagamentos')">
+            <i class='bx bx-credit-card' ></i>
+            <span class="text-[12px] ml-4 text-gray-200">{{ __('Opções de Pagamentos') }}</span>
+        </x-nav-link>
     </div>
     <hr class="h-px my-2 border-0 dark:bg-gray-700">
 

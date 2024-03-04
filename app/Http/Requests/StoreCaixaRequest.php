@@ -22,7 +22,7 @@ class StoreCaixaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'caixa_nome' => 'required|string|max:255|unique:caixas'
         ];
     }
 }

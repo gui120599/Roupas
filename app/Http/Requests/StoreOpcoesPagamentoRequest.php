@@ -11,7 +11,7 @@ class StoreOpcoesPagamentoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,10 @@ class StoreOpcoesPagamentoRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-            //
+            'opcaopag_nome' => 'required|unique:opcoes_pagamentos|string|max:255',
         ];
+
     }
 }
